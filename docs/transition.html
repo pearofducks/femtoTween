@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/primer/build/build.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <title>femtoTween - transition example</title>
+  </head>
+  <body>
+    <main class="mx-3 mt-2">
+      <h1 class="f1-light">femtoTween - Vue.js transition example</h1>
+      <div id="app">
+        <div class="form-checkbox">
+          <label>
+            <input type="checkbox" v-model="checked">Check the box!
+          </label>
+          <p class="note" id="help-text-for-checkbox">
+            This will trigger a collapse/expansion transition
+          </p>
+        </div>
+        <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" :css="false">
+          <div style="will-change: height; overflow: hidden;" v-if="checked">
+            <div class="p-3 bg-blue-light">
+              <h3>Hello!</h3>
+              <p>This content should have expanded smoothly</p>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </main>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/femtotween"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: () => ({ checked: false }),
+        methods: {
+          beforeEnter(el) {
+            el.style.maxHeight = '0px'
+          },
+          enter(el, done) {
+            el.style.maxHeight = '100%'
+            let dest = el.getBoundingClientRect().height
+            el.style.maxHeight = '0px'
+            femtoTween.tween(0, dest, (v) => {
+              el.style.maxHeight = v + 'px'
+            }, {
+              done: () => {
+                el.style.maxHeight = '100%'
+                done()
+              }
+            })
+          },
+          leave(el, done) {
+            let original = el.getBoundingClientRect().height
+            femtoTween.tween(original, 0, (v) => {
+              el.style.maxHeight = v + 'px'
+            }, { done })
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

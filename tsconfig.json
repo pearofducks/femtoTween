@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": [ "node" ],
+    "lib": [
+      "es2018",
+      "dom",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "./*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}

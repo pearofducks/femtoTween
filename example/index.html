@@ -1,15 +1,38 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/primer/build/build.css">
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" class="m-4">
+      <label>A number to be tweened to:
+        <input class="form-control ml-2" v-model.number="number" placeholder="Enter a number" type="number" number step="20"/>
+      </label>
+      <h1>{{ animatedNumber }}</h1>
+    </div>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/femtotween"></script>
     <script>
       new Vue({
         el: '#app',
         data: () => ({
-        })
+          number: 0,
+          tweenedNumber: 0
+        }),
+        computed: {
+          animatedNumber: function() {
+            if (!this.tweenedNumber) return 0
+            return this.tweenedNumber.toFixed(0);
+          }
+        },
+        watch: {
+          number(newValue, oldValue) {
+            window.femtoTween.tween(oldValue, newValue, (v) => { this.tweenedNumber = v })
+          }
+        },
+        mounted() {
+          setTimeout(() => { this.number = 1000 }, 200)
+          setTimeout(() => { this.number = 100 }, 800)
+        }
       })
     </script>
   </body>

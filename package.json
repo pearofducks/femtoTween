@@ -2,6 +2,10 @@
   "name": "femtotween",
   "version": "0.9.0",
   "description": "a minimalistic tween library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pearofducks/femtoTween"
+  },
   "main": "dist/femtoTween.js",
   "module": "dist/femtoTween.esm.js",
   "scripts": {

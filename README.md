@@ -1,7 +1,7 @@
 > femtoTween
 
 femtoTween's goal is to provide just enough tweening functionality to cover basic use cases.
-Through this primary goal, it should also be one of the smallest tweening libraries (less than 1k gzip'd).
+Through this primary goal, it should also be one of the smallest tweening libraries (less than 1k un-minified even).
 
 ```
 yarn add femtotween

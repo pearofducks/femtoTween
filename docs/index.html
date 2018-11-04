@@ -1,14 +1,56 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/primer/build/build.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <title>femtoTween</title>
   </head>
   <body>
-    <div id="app" class="m-4">
-      <label>A number to be tweened to:
-        <input class="form-control ml-2" v-model.number="number" placeholder="Enter a number" type="number" number step="20"/>
-      </label>
-      <h1>{{ animatedNumber }}</h1>
-    </div>
+    <main class="mx-3 mt-2">
+      <h1 class="f00-light">femtoTween</h1>
+      <p>
+        femtoTween's goal is to provide just enough tweening functionality to cover basic use cases.
+        Through this primary goal, it should also be one of the smallest tweening libraries (less than 1k gzip'd).
+      </p>
+
+      <ul class="list-style-none bg-blue-light p-3 mt-3 mb-2">
+        <li><code class="f4">yarn add femtotween</code></li>
+        <li><code class="f4">import { tween } from 'femtotween'</code></li>
+      </ul>
+
+      <h4 class="mt-3 mb-2 Label bg-blue">Very few features</h4>
+      <ul class="list-style-none">
+        <li>Minimal API can be grok'd in seconds</li>
+        <li>Supports a <code class="text-purple">done</code> callback - especially useful for <a href="https://vuejs.org/v2/guide/transitions.html#JavaScript-Hooks">Vue.js transitions via JS hooks</a></li>
+        <li>Supports and provides additional easing functions</li>
+      </ul>
+
+      <h4 class="mt-4 mb-2 Label bg-blue">Example</h4>
+      <div id="app">
+        <label style="display: block" class="f3-light my-2">A number to be tweened to:
+          <input class="form-control" v-model.number="number" placeholder="Enter a number" type="number" number step="20"/>
+        </label>
+        <h3 class="alt-h3">{{ animatedNumber }}</h3>
+      </div>
+
+      <h4 class="mt-4 mb-2 Label bg-blue">API</h4>
+
+      <p class="bg-blue-light p-3"><code class="f4">tween(from, to, callback, options)</code></p>
+      <div style="display: grid; grid-template-columns: 1fr 3fr; align-items: baseline">
+        <code class="text-purple text-right f5 mr-3">from</code> <p>value to tween from</p>
+        <code class="text-purple text-right f5 mr-3">to</code> <p>value to tween to</p>
+        <code class="text-purple text-right f5 mr-3">callback</code> <p>callback function that will be called on each tween-frame</p>
+        <code class="text-purple text-right f5 mr-3">options</code>
+        <ul class="list-style-none">
+          <li><code class="text-purple">done</code>: callback function called when tweening is done</li>
+          <li><code class="text-purple">easeFunc</code>: function used for easing</li>
+          <li><code class="text-purple">time</code>: time in ms for the tween</li>
+        </ul>
+      </div>
+
+    </main>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/femtotween"></script>
     <script>
@@ -16,7 +58,7 @@
         el: '#app',
         data: () => ({
           number: 0,
-          tweenedNumber: 0
+          tweenedNumber: 0,
         }),
         computed: {
           animatedNumber: function() {
@@ -26,7 +68,7 @@
         },
         watch: {
           number(newValue, oldValue) {
-            window.femtoTween.tween(oldValue, newValue, (v) => { this.tweenedNumber = v })
+            femtoTween.tween(oldValue, newValue, (v) => { this.tweenedNumber = v })
           }
         },
         mounted() {

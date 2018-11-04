@@ -13,9 +13,9 @@ export function tween(from, to, cb, { time, done, easeFunc }: tweenOptions = {})
   let start = null
   function step(timestamp) {
     if (!start) start = timestamp
-    let progress = timestamp - start
-    let percentage = progress / targetTime
-    if (percentage < 1) cb(from - ease(percentage) * diff)
+    const progress = timestamp - start
+    const percentage = Math.min(progress / targetTime, 1)
+    cb(from - ease(percentage) * diff)
     if (progress < targetTime) {
       window && window.requestAnimationFrame(step)
     } else {

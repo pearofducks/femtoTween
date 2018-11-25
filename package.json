@@ -8,6 +8,7 @@
   },
   "main": "dist/femtoTween.js",
   "module": "dist/femtoTween.esm.js",
+  "sideEffects": false,
   "scripts": {
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ava",
     "build": "rollup -c rollup.config.js",

@@ -6,11 +6,11 @@
     "type": "git",
     "url": "https://github.com/pearofducks/femtoTween"
   },
-  "main": "dist/femtoTween.js",
+  "main": "dist/femtoTween.umd.js",
   "module": "dist/femtoTween.esm.js",
   "sideEffects": false,
   "scripts": {
-    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ava",
+    "test": "ava",
     "build": "rollup -c rollup.config.js",
     "prebump": "npm run build",
     "bump": "npm version patch",
@@ -19,27 +19,20 @@
   "author": "Dave Honneffer <pearofducks@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^11.13.8",
     "ava": "^1.4.1",
-    "rollup": "^1.10.1",
+    "rollup": "^1.13.0",
+    "rollup-plugin-buble": "^0.19.6",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript": "^1.0.1",
     "sinon": "^7.3.2",
-    "ts-node": "^8.1.0",
-    "tslib": "^1.9.3",
-    "typescript": "^3.4.5",
     "window": "^4.2.6"
   },
   "ava": {
     "files": [
-      "test/**/*.test.ts"
-    ],
-    "compileEnhancements": false,
-    "extensions": [
-      "ts"
+      "test/**/*.test.js"
     ],
     "require": [
-      "ts-node/register"
-    ]
+      "esm"
+    ],
+    "verbose": true
   }
 }

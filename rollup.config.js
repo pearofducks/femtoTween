@@ -1,20 +1,19 @@
 import sourceMaps from 'rollup-plugin-sourcemaps'
-import typescript from 'rollup-plugin-typescript'
+import buble from 'rollup-plugin-buble'
 
 const pkg = require('./package.json')
 const libraryName = 'femtoTween'
-const input = 'index.ts'
+const input = 'index.js'
 const sourcemap = true
 
 export default [
-{
-	input,
-	output: { file: pkg.main, name: libraryName, format: 'umd', sourcemap },
-	plugins: [ typescript({ target: 'es5' }), sourceMaps() ]
-},
-{
-	input,
-	output: { file: pkg.module, format: 'es', sourcemap },
-	plugins: [ typescript(), sourceMaps() ]
-}
+  {
+    input,
+    output: { file: pkg.main, name: libraryName, format: 'umd', sourcemap },
+    plugins: [ buble(), sourceMaps() ]
+  },
+  {
+    input,
+    output: { file: pkg.module, format: 'es' }
+  }
 ]

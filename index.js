@@ -1,12 +1,6 @@
 import { easeInOutQuart } from './ease'
 
-interface tweenOptions {
-  time?: number,
-  done?: Function,
-  easeFunc?: Function
-}
-
-export function tween(from, to, cb, { time, done, easeFunc }: tweenOptions = {}) {
+export function tween(from, to, cb, { time, done, easeFunc } = {}) {
   const ease = easeFunc || easeInOutQuart
   const diff = from - to
   const targetTime = time || 400

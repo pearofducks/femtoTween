@@ -12,7 +12,6 @@
   "scripts": {
     "test": "ava",
     "build": "rollup -c rollup.config.js",
-    "prebump": "npm run build",
     "bump": "npm version patch",
     "version": "npm run build && npm publish --access public"
   },

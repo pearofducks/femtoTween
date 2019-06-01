@@ -13,7 +13,8 @@
     "test": "ava",
     "build": "rollup -c rollup.config.js",
     "bump": "npm version patch",
-    "version": "npm run build && npm publish --access public"
+    "version": "npm run build && npm publish --access public",
+    "postversion": "git push --follow-tags"
   },
   "author": "Dave Honneffer <pearofducks@gmail.com>",
   "license": "MIT",

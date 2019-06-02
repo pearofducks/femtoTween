@@ -21,6 +21,6 @@ import { tween } from 'femtotween'
 If you're shipping to es5 environments, you'll need to either:
 
 - source the es5-browser-build :: e.g. `import { tween } from 'femtotween/dist/femtoTween.umd.js'`
-- or enable transpiling of `.esm.js`files in your bundler
+- or enable transpiling of `.esm.js` files in your bundler
 
 This module ships es6 module _and_ code in the `femtoTween.esm.js` file - both for convenience to those shipping more modern builds, as well as to ensure the smallest (and least opinionated) final build.

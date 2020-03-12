@@ -46,14 +46,16 @@
         <code class="text-purple text-right f5 mr-3">options</code>
         <ul class="list-style-none">
           <li><code class="text-purple">done</code>: callback function called when tweening is done</li>
-          <li><code class="text-purple">easeFunc</code>: function used for easing</li>
-          <li><code class="text-purple">time</code>: time in ms for the tween</li>
+          <li><code class="text-purple">easeFunc</code>: function used for easing - default: <code class="text-purple">easeInOutQuart</code></li>
+          <li><code class="text-purple">time</code>: time in ms for the tween - default: <code class="text-purple">400</code></li>
         </ul>
+        <code class="text-purple text-right f5 mr-3">return value</code> <p><code class="text-purple">() =&gt; void</code> - a 'stop' function to stop tweening</p>
       </div>
 
     </main>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/femtotween"></script>
+    <!-- <script src="/dist/femtotween.umd.js"></script> -->
     <script>
       new Vue({
         el: '#app',
@@ -67,6 +69,12 @@
             return this.tweenedNumber.toFixed(0);
           }
         },
+        methods: {
+          demoStop() {
+            const stop = femtoTween.tween(0, 10000, v => { this.tweenedNumber = v }, { time: 1000 })
+            setTimeout(stop, 300)
+          }
+        },
         watch: {
           number(newValue, oldValue) {
             femtoTween.tween(oldValue, newValue, (v) => { this.tweenedNumber = v })
@@ -75,6 +83,7 @@
         mounted() {
           setTimeout(() => { this.number = 1000 }, 200)
           setTimeout(() => { this.number = 100 }, 800)
+          setTimeout(this.demoStop, 3000)
         }
       })
     </script>

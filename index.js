@@ -1,11 +1,14 @@
 import { easeInOutQuart } from './ease'
 
 export function tween(from, to, cb, { time, done, easeFunc } = {}) {
+  let stopped = false
+  const stop = () => stopped = true
   const ease = easeFunc || easeInOutQuart
   const diff = from - to
   const targetTime = time || 400
   let start = null
   function step(timestamp) {
+    if (stopped) return
     if (!start) start = timestamp
     const progress = timestamp - start
     const percentage = Math.min(progress / targetTime, 1)
@@ -18,6 +21,7 @@ export function tween(from, to, cb, { time, done, easeFunc } = {}) {
     }
   }
   window && window.requestAnimationFrame(step)
+  return stop
 }
 
 export * from './ease'

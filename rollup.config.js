@@ -1,5 +1,6 @@
 import sourceMaps from 'rollup-plugin-sourcemaps'
-import buble from 'rollup-plugin-buble'
+import buble from '@rollup/plugin-buble'
+import { terser } from 'rollup-plugin-terser'
 
 const pkg = require('./package.json')
 const libraryName = 'femtoTween'
@@ -10,10 +11,11 @@ export default [
   {
     input,
     output: { file: pkg.main, name: libraryName, format: 'umd', sourcemap },
-    plugins: [ buble(), sourceMaps() ]
+    plugins: [ buble(), terser(), sourceMaps() ]
   },
   {
     input,
-    output: { file: pkg.module, format: 'es' }
+    output: { file: pkg.module, format: 'es', sourcemap },
+    plugins: [ terser(), sourceMaps() ]
   }
 ]

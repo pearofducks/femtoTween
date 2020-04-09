@@ -53,10 +53,11 @@
       </div>
 
     </main>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/femtotween"></script>
-    <!-- <script src="/dist/femtotween.umd.js"></script> -->
-    <script>
+    <script type="module">
+      import Vue from 'https://unpkg.com/vue/dist/vue.esm.browser.min.js'
+      import { tween } from 'https://unpkg.com/femtotween/dist/femtoTween.esm.js'
+      // import { tween } from '/dist/femtotween.esm.js'
+
       new Vue({
         el: '#app',
         data: () => ({
@@ -71,13 +72,13 @@
         },
         methods: {
           demoStop() {
-            const stop = femtoTween.tween(0, 10000, v => { this.tweenedNumber = v }, { time: 1000 })
+            const stop = tween(0, 10000, v => { this.tweenedNumber = v }, { time: 1000 })
             setTimeout(stop, 300)
           }
         },
         watch: {
           number(newValue, oldValue) {
-            femtoTween.tween(oldValue, newValue, (v) => { this.tweenedNumber = v })
+            tween(oldValue, newValue, (v) => { this.tweenedNumber = v })
           }
         },
         mounted() {

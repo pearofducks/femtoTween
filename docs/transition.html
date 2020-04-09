@@ -30,9 +30,10 @@
         </transition>
       </div>
     </main>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/femtotween"></script>
-    <script>
+    <script type="module">
+      import Vue from 'https://unpkg.com/vue/dist/vue.esm.browser.min.js'
+      import { tween } from 'https://unpkg.com/femtotween/dist/femtoTween.esm.js'
+
       new Vue({
         el: '#app',
         data: () => ({ checked: false }),
@@ -44,7 +45,7 @@
             el.style.maxHeight = '100%'
             let dest = el.getBoundingClientRect().height
             el.style.maxHeight = '0px'
-            femtoTween.tween(0, dest, (v) => {
+            tween(0, dest, (v) => {
               el.style.maxHeight = v + 'px'
             }, {
               done: () => {
@@ -55,7 +56,7 @@
           },
           leave(el, done) {
             let original = el.getBoundingClientRect().height
-            femtoTween.tween(original, 0, (v) => {
+            tween(original, 0, (v) => {
               el.style.maxHeight = v + 'px'
             }, { done })
           }

@@ -11,11 +11,16 @@ export default [
   {
     input,
     output: { file: pkg.main, name: libraryName, format: 'umd', sourcemap },
-    plugins: [ buble(), terser(), sourceMaps() ]
+    plugins: [buble(), terser(), sourceMaps()]
+  },
+  {
+    input,
+    output: { file: 'dist/femtoTween.esm.prod.js', format: 'es' },
+    plugins: [terser()]
   },
   {
     input,
     output: { file: pkg.module, format: 'es', sourcemap },
-    plugins: [ terser(), sourceMaps() ]
+    plugins: [sourceMaps()]
   }
 ]

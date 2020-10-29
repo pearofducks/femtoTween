@@ -1,6 +1,7 @@
 import { easeInOutQuart } from './ease'
 
 export function tween(from, to, cb, { time, done, easeFunc } = {}) {
+  const windowExists = (typeof window !== 'undefined')
   let stopped = false
   const stop = () => stopped = true
   const ease = easeFunc || easeInOutQuart
@@ -14,13 +15,13 @@ export function tween(from, to, cb, { time, done, easeFunc } = {}) {
     const percentage = Math.min(progress / targetTime, 1)
     cb(from - ease(percentage) * diff)
     if (progress < targetTime) {
-      window && window.requestAnimationFrame(step)
+      window.requestAnimationFrame(step)
     } else {
       cb(to)
       done && done()
     }
   }
-  window && window.requestAnimationFrame(step)
+  windowExists && window.requestAnimationFrame(step)
   return stop
 }
 

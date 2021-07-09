@@ -1,24 +1,20 @@
-import test from 'ava'
+import 'abdomen/setup'
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
 import sinon from 'sinon'
-import Window from 'window'
-import { sleep } from './helpers'
-import raf from './raf'
-import { tween } from '../index'
+import { sleep } from './helpers.js'
+import { tween } from '../index.js'
 
-global.window = new Window()
-
-const rafStub = sinon.stub().callsFake(raf)
 const cb = sinon.spy()
 const done = sinon.spy()
-const easeFunc = sinon.spy()
-window.requestAnimationFrame = rafStub
+const ease = sinon.spy()
 
-test('tween is sane', async(t) => {
-  t.plan(4)
-  tween(0, 1, cb, { time: 1, done, easeFunc })
-  await sleep(16 * 2)
-  t.true(rafStub.called)
-  t.true(cb.called)
-  t.true(easeFunc.called)
-  t.true(done.called)
+test('tween is sane', async () => {
+  tween(0, 1, cb, { time: 1, done, ease })
+  await sleep(16 * 4)
+  assert.ok(cb.called)
+  assert.ok(ease.called)
+  assert.ok(done.called)
 })
+
+test.run()

@@ -3,41 +3,34 @@
   "version": "1.1.2",
   "description": "a minimalistic tween library",
   "files": [
-    "dist/"
+    "dist/",
+    "types/"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/pearofducks/femtoTween"
   },
-  "main": "dist/femtoTween.umd.js",
-  "module": "dist/femtoTween.esm.js",
+  "main": "dist/femtoTween.js",
+  "exports": "./dist/femtoTween.js",
   "sideEffects": false,
+  "type": "module",
   "scripts": {
-    "test": "ava",
-    "build": "rollup -c rollup.config.js",
-    "bump": "npm version patch",
-    "version": "npm run build && npm publish --access public",
+    "test": "node test",
+    "types": "tsc",
+    "build": "rollup -c",
+    "preversion": "npm run test && npm run build && npm run types",
+    "version": "npm publish",
     "postversion": "git push --follow-tags"
   },
   "author": "Dave Honneffer <pearofducks@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-buble": "^0.21.3",
-    "ava": "^3.11.0",
-    "esm": "^3.2.25",
-    "rollup": "^2.23.0",
-    "rollup-plugin-sourcemaps": "^0.6.2",
-    "rollup-plugin-terser": "^6.1.0",
-    "sinon": "^9.0.2",
-    "window": "^4.2.7"
-  },
-  "ava": {
-    "files": [
-      "test/**/*.test.js"
-    ],
-    "require": [
-      "esm"
-    ],
-    "verbose": true
+    "abdomen": "^1.0.0",
+    "jsdom": "^16.6.0",
+    "rollup": "^2.53.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "sinon": "^11.1.1",
+    "typescript": "^4.3.5",
+    "uvu": "^0.5.1"
   }
 }

@@ -1,20 +1,35 @@
-import { easeInOutQuart } from './ease'
+import { easeInOutQuart } from './ease.js'
 
-export function tween(from, to, cb, { time, done, easeFunc } = {}) {
+/**
+ * @callback tweenCallback
+ * @param {number} v - the current value of the tween
+ * @returns {void}
+ */
+
+/**
+ * change a number over time
+ * @arg {number} from - the number to start at
+ * @arg {number} to - the number to finish at
+ * @arg {tweenCallback} cb - function called as tween progresses
+ * @arg {object} [opts] - options
+ * @arg {number} [opts.time = 400] - how long the tween should last
+ * @arg {function} [opts.done] - function called when tweening is finished
+ * @arg {function} [opts.ease] - function used for easing the tween
+ * @returns {function} - callback that can stop a tween in progress
+ */
+export function tween(from, to, cb, { time = 400, done, ease = easeInOutQuart } = {}) {
   const windowExists = (typeof window !== 'undefined')
   let stopped = false
   const stop = () => stopped = true
-  const ease = easeFunc || easeInOutQuart
   const diff = from - to
-  const targetTime = time || 400
   let start = null
   function step(timestamp) {
     if (stopped) return
     if (!start) start = timestamp
     const progress = timestamp - start
-    const percentage = Math.min(progress / targetTime, 1)
+    const percentage = Math.min(progress / time, 1)
     cb(from - ease(percentage) * diff)
-    if (progress < targetTime) {
+    if (progress < time) {
       window.requestAnimationFrame(step)
     } else {
       cb(to)
@@ -25,4 +40,4 @@ export function tween(from, to, cb, { time, done, easeFunc } = {}) {
   return stop
 }
 
-export * from './ease'
+export * from './ease.js'

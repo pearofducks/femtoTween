@@ -12,6 +12,7 @@
   },
   "main": "dist/femtoTween.js",
   "exports": "./dist/femtoTween.js",
+  "types": "./types/index.d.ts",
   "sideEffects": false,
   "type": "module",
   "scripts": {

@@ -10,9 +10,9 @@
     "type": "git",
     "url": "https://github.com/pearofducks/femtoTween"
   },
-  "main": "dist/femtoTween.js",
-  "module": "dist/femtoTween.js",
-  "exports": "./dist/femtoTween.js",
+  "main": "dist/femtotween.js",
+  "module": "dist/femtotween.js",
+  "exports": "./dist/femtotween.js",
   "types": "./types/index.d.ts",
   "sideEffects": false,
   "type": "module",

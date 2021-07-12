@@ -11,6 +11,7 @@
     "url": "https://github.com/pearofducks/femtoTween"
   },
   "main": "dist/femtoTween.js",
+  "module": "dist/femtoTween.js",
   "exports": "./dist/femtoTween.js",
   "types": "./types/index.d.ts",
   "sideEffects": false,

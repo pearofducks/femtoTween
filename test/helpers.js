@@ -1,1 +1,1 @@
-export const sleep = (t) => new Promise(r => setTimeout(r, t))
+export const waitRAF = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))

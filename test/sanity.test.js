@@ -2,7 +2,7 @@ import 'abdomen/setup'
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 import sinon from 'sinon'
-import { sleep } from './helpers.js'
+import { waitRAF } from './helpers.js'
 import { tween } from '../index.js'
 
 const cb = sinon.spy()
@@ -11,7 +11,7 @@ const ease = sinon.spy()
 
 test('tween is sane', async () => {
   tween(0, 1, cb, { time: 1, done, ease })
-  await sleep(16 * 4)
+  await waitRAF()
   assert.ok(cb.called)
   assert.ok(ease.called)
   assert.ok(done.called)

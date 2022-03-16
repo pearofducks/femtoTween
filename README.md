@@ -24,3 +24,7 @@ If you're shipping to es5 environments, you'll need to either:
 - or enable transpiling of `.esm.js` files in your bundler
 
 This module ships es6 module _and_ code in the `femtoTween.esm.js` file - both for convenience to those shipping more modern builds, as well as to ensure the smallest (and least opinionated) final build.
+
+##### implementations
+
+- [vue-femtotween](https://github.com/euphemism/vue-femtotween) provides a reactivity wrapper for Vue 3

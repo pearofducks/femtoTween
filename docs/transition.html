@@ -31,11 +31,10 @@
       </div>
     </main>
     <script type="module">
-      import Vue from 'https://unpkg.com/vue@2.6.14/dist/vue.esm.browser.min.js'
+      import { createApp } from 'https://unpkg.com/vue@3.2.31/dist/vue.esm-browser.prod.js'
       import { tween } from 'https://unpkg.com/femtotween/dist/femtotween.js'
 
-      new Vue({
-        el: '#app',
+      createApp({
         data: () => ({ checked: false }),
         methods: {
           beforeEnter(el) {
@@ -61,7 +60,7 @@
             }, { done })
           }
         }
-      })
+      }).mount('#app')
     </script>
   </body>
 </html>

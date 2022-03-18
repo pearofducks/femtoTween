@@ -54,12 +54,10 @@
 
     </main>
     <script type="module">
-      import Vue from 'https://unpkg.com/vue@2.6.14/dist/vue.esm.browser.min.js'
+      import { createApp } from 'https://unpkg.com/vue@3.2.31/dist/vue.esm-browser.prod.js'
       import { tween } from 'https://unpkg.com/femtotween/dist/femtotween.js'
-      // import { tween } from '/dist/femtotween.esm.js'
 
-      new Vue({
-        el: '#app',
+      const app = createApp({
         data: () => ({
           number: 0,
           tweenedNumber: 0,
@@ -86,7 +84,7 @@
           setTimeout(() => { this.number = 100 }, 800)
           setTimeout(this.demoStop, 3000)
         }
-      })
+      }).mount('#app')
     </script>
   </body>
 </html>

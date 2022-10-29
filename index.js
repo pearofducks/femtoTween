@@ -15,17 +15,27 @@ import { easeInOutQuart } from './ease.js'
  * @arg {number} [opts.time = 400] - how long the tween should last
  * @arg {function} [opts.done] - function called when tweening is finished
  * @arg {function} [opts.ease] - function used for easing the tween
+ * @arg {Number} [opts.delay] - Delays the tweened
  * @returns {function} - callback that can stop a tween in progress
  */
-export function tween(from, to, cb, { time = 400, done, ease = easeInOutQuart } = {}) {
+export function tween(from, to, cb, { time = 400, done, ease = easeInOutQuart, delay=0 } = {}) {
   const windowExists = (typeof window !== 'undefined')
   let stopped = false
   const stop = () => stopped = true
   const diff = from - to
   let start = null
+  /**
+   * Step function
+   * @arg {Number} timestamp - the time elsaped since the animation started
+   */
   function step(timestamp) {
     if (stopped) return
-    if (!start) start = timestamp
+    if (!start) start = (timestamp + delay)
+    if (start > timestamp) {
+      window.requestAnimationFrame(step)
+      return
+    }
+
     const progress = timestamp - start
     const percentage = Math.min(progress / time, 1)
     cb(from - ease(percentage) * diff)
